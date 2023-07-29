@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Book Issue and Return System</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" 
+			integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	</head>
+	<body>		
+			<h1 align="center"><u>Book Issue and Return System</u></h1>	
+			<br>
+			<hr>
+			<div class="container my-2">
+				<h3 align="center">Book Issue Confirmed ! </h3>
+				<br>
+				<h5>Books issued to you are :</h5>			
+				<br>
+				<table class="table table-striped table-bordered">				
+				<thead class="table-dark">
+					<tr>
+						<th> BOOK ID </th>
+						<th> TITLE </th>
+						<th> AUTHOR </th>
+						<th> GENRE </th>
+						<th> ISSUE DATE </th>
+						<th> RETURN DATE </th>
+						<th> ACTION </th>	
+					</tr>			
+				</thead>
+				<tbody class="table-dark">					
+					<tr th:each="book : ${user.getBorrowedBooks()}">
+						<td th:text="${book.getBookId()}"></td>
+						<td th:text="${book.getTitle()}"></td>
+						<td th:text="${book.getAuthor()}"></td>
+						<td th:text="${book.getGenre()}"></td>
+						<td th:text="${book.getIssuedDate()}"></td>
+						<td th:text="${book.getReturnDate()}"></td>
+						<td><a th:href="@{/returnBook/{uid}/{bid}(uid=${user.getBorrowerId()} , bid=${book.getBookId()})}" class="btn btn-danger">Return Book</a></td>
+					</tr>					
+				</tbody>
+			</table>				
+			</div>
+	</body>
+</html>
